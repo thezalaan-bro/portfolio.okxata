@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jalabh Bhandari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS VARIABLES / THEMES ===== */
+        :root, [data-theme="light"] {
+            --bg: #f5f2ee;
+            --bg2: #ede9e3;
+            --surface: #ffffff;
+            --surface2: #f0ece6;
+            --border: #d9d3c8;
+            --text: #1a1714;
+            --text2: #6b6560;
+            --text3: #9b9490;
+            --accent: #8b6914;
+            --accent2: #c49a2e;
+            --accent-bg: #fdf6e3;
+            --nav-bg: rgba(245,242,238,0.85);
+            --card-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --gradient: linear-gradient(135deg, #8b6914, #c49a2e, #a07820);
+            --hero-line: #c49a2e;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1714;
+            --bg2: #211e1a;
+            --surface: #2a2520;
+            --surface2: #322d27;
+            --border: #3d3830;
+            --text: #f0ece6;
+            --text2: #b8b0a6;
+            --text3: #7a736b;
+            --accent: #c49a2e;
+            --accent2: #e8b84b;
+            --accent-bg: #2a2215;
+            --nav-bg: rgba(26,23,20,0.90);
+            --card-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --gradient: linear-gradient(135deg, #c49a2e, #e8b84b, #c49a2e);
+            --hero-line: #c49a2e;
+        }
+
+        [data-theme="black"] {
+            --bg: #000000;
+            --bg2: #0a0a0a;
+            --surface: #111111;
+            --surface2: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #f5f5f5;
+            --text2: #a0a0a0;
+            --text3: #606060;
+            --accent: #d4a843;
+            --accent2: #f0c55a;
+            --accent-bg: #150f00;
+            --nav-bg: rgba(0,0,0,0.95);
+            --card-shadow: 0 4px 30px rgba(212,168,67,0.1);
+            --gradient: linear-gradient(135deg, #d4a843, #f0c55a, #d4a843);
+            --hero-line: #d4a843;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg2); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+        /* ===== NAV ===== */
+        #navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1rem 5%;
+            display: flex; align-items: center; justify-content: space-between;
+            background: transparent;
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+        #navbar.scrolled {
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+
+        #navLinks {
+            display: flex; align-items: center; gap: 2rem;
+            list-style: none;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.6rem 2rem;
+        }
+        #navLinks a {
+            text-decoration: none; color: var(--text2);
+            font-size: 0.9rem; font-weight: 500;
+            transition: color 0.2s;
+        }
+        #navLinks a:hover { color: var(--accent); }
+
+        .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+        /* Theme switcher */
+        .theme-switcher {
+            display: flex; align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.3rem;
+            gap: 0.2rem;
+        }
+        .theme-btn {
+            width: 32px; height: 32px;
+            border: none; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            background: transparent; color: var(--text2);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .theme-btn.active {
+            background: var(--accent);
+            color: #000;
+        }
+        .theme-btn:hover:not(.active) { background: var(--surface2); }
+
+        .nav-contact-btn {
+            padding: 0.55rem 1.5rem;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .nav-contact-btn:hover { background: var(--accent); color: #fff; }
+
+        /* Mobile menu btn */
+        .mobile-menu-btn {
+            display: none; background: none; border: none; cursor: pointer;
+            color: var(--text); font-size: 1.5rem; padding: 0.3rem;
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            position: fixed; top: 0; right: -280px; width: 280px; height: 100vh;
+            background: var(--surface); border-left: 1px solid var(--border);
+            z-index: 200; padding: 5rem 2rem 2rem;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        #mobileMenu.open { right: 0; }
+        #mobileMenu a {
+            display: block; padding: 0.75rem 1rem;
+            text-decoration: none; color: var(--text2);
+            border-radius: 8px; font-weight: 500;
+            transition: all 0.2s;
+        }
+        #mobileMenu a:hover { background: var(--surface2); color: var(--accent); }
+        .mobile-close {
+            position: absolute; top: 1.25rem; right: 1.25rem;
+            background: var(--surface2); border: none; cursor: pointer;
+            color: var(--text); width: 36px; height: 36px; border-radius: 50%;
+            font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+        }
+        .mobile-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 150; backdrop-filter: blur(2px);
+        }
+        .mobile-overlay.show { display: block; }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh;
+            padding: 8rem 5% 4rem;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .hero-bg-circle-1 {
+            width: 600px; height: 600px;
+            background: var(--accent2);
+            top: -100px; right: -150px;
+        }
+        .hero-bg-circle-2 {
+            width: 400px; height: 400px;
+            background: var(--accent);
+            bottom: -50px; left: -100px;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--accent-bg);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 100px;
+            padding: 0.35rem 1rem;
+            font-size: 0.82rem; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: fadeDown 0.6s ease both;
+        }
+
+        .hero-avatar {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 0 6px var(--accent-bg), var(--card-shadow);
+            animation: fadeDown 0.7s ease both;
+            background: var(--surface2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; overflow: hidden;
+        }
+
+        .hero-avatar-placeholder {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 0 6px var(--accent-bg), var(--card-shadow);
+            background: var(--surface2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+            animation: fadeDown 0.7s ease both;
+        }
+
+        .hero-greeting {
+            font-size: 1.1rem; color: var(--text2);
+            margin-bottom: 0.5rem;
+            animation: fadeUp 0.6s 0.1s ease both;
+        }
+
+        h1.hero-title {
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+            animation: fadeUp 0.6s 0.2s ease both;
+        }
+        h1.hero-title .accent-line {
+            display: block;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text2);
+            max-width: 520px;
+            margin: 0.75rem auto 2rem;
+            font-weight: 300;
+            animation: fadeUp 0.6s 0.3s ease both;
+        }
+
+        .hero-location {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            color: var(--text3); font-size: 0.88rem;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.6s 0.35s ease both;
+        }
+
+        .hero-actions {
+            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+            animation: fadeUp 0.6s 0.45s ease both;
+        }
+
+        .btn-primary {
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: #fff;
+            border: none; border-radius: 100px;
+            font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(139,105,20,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,105,20,0.4); }
+
+        .btn-secondary {
+            padding: 0.8rem 2rem;
+            background: var(--surface);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: 100px;
+            font-weight: 500; font-size: 0.95rem;
+            cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 5rem 5%; scroll-margin-top: 80px; }
+
+        .section-label {
+            text-align: center; color: var(--accent);
+            font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            text-align: center; color: var(--text2);
+            max-width: 540px; margin: 0 auto 3rem;
+            font-size: 1rem; font-weight: 300;
+        }
+
+        .divider {
+            width: 60px; height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+            margin: 1rem auto 2rem;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-img-wrap {
+            position: relative;
+        }
+        .about-img-box {
+            aspect-ratio: 3/4;
+            background: var(--surface2);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 6rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .about-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .about-stat-card {
+            position: absolute; bottom: -1.5rem; right: -1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+        .about-stat-card .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; font-weight: 700; color: var(--accent);
+        }
+        .about-stat-card .lbl { font-size: 0.8rem; color: var(--text3); }
+
+        .about-bio { color: var(--text2); margin-bottom: 2rem; font-size: 1rem; line-height: 1.85; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .skill-tag {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
+            text-align: center;
+            font-size: 0.85rem; font-weight: 500; color: var(--text2);
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+        .info-list { list-style: none; }
+        .info-list li {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list .lbl { color: var(--text3); font-weight: 500; min-width: 80px; }
+        .info-list .val { color: var(--text2); }
+
+        /* ===== SERVICES / TOOLS ===== */
+        #services { background: var(--bg2); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: var(--card-shadow);
+        }
+        .service-icon {
+            width: 52px; height: 52px;
+            background: var(--accent-bg);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--accent);
+        }
+        .service-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .service-card p { color: var(--text2); font-size: 0.88rem; line-height: 1.7; }
+
+        /* ===== WORK ===== */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .work-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--accent);
+        }
+        .work-card-img {
+            height: 200px;
+            background: var(--surface2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 4rem;
+            position: relative; overflow: hidden;
+        }
+        .work-card-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--surface) 0%, transparent 60%);
+        }
+        .work-card-body { padding: 1.5rem; }
+        .work-tag {
+            display: inline-block;
+            background: var(--accent-bg);
+            color: var(--accent);
+            border-radius: 100px;
+            padding: 0.2rem 0.75rem;
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .work-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .work-card p { color: var(--text2); font-size: 0.88rem; line-height: 1.6; }
+        .work-card-footer {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .work-card-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .tool-pill {
+            background: var(--surface2);
+            border-radius: 100px; padding: 0.2rem 0.6rem;
+            font-size: 0.72rem; color: var(--text3);
+        }
+
+        /* ===== EDUCATION ===== */
+        #education { background: var(--bg2); }
+        .edu-timeline { max-width: 700px; margin: 0 auto; position: relative; }
+        .edu-timeline::before {
+            content: ''; position: absolute;
+            left: 22px; top: 8px; bottom: 8px;
+            width: 2px; background: var(--border);
+        }
+        .edu-item {
+            display: flex; gap: 1.5rem;
+            margin-bottom: 2rem; position: relative;
+        }
+        .edu-dot {
+            width: 46px; height: 46px; min-width: 46px;
+            background: var(--accent-bg);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; z-index: 1;
+        }
+        .edu-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            transition: border-color 0.2s;
+        }
+        .edu-content:hover { border-color: var(--accent); }
+        .edu-year {
+            font-size: 0.78rem; color: var(--accent);
+            font-weight: 700; letter-spacing: 0.05em;
+            text-transform: uppercase; margin-bottom: 0.3rem;
+        }
+        .edu-content h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .edu-content p { color: var(--text2); font-size: 0.88rem; }
+
+        /* ===== CONTACT ===== */
+        .contact-wrap {
+            max-width: 680px; margin: 0 auto;
+        }
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block; font-size: 0.82rem; font-weight: 600;
+            color: var(--text2); margin-bottom: 0.4rem;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%; padding: 0.75rem 1rem;
+            background: var(--bg2);
+            border: 1.5px solid var(--border);
+            border-radius: 10px; color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus { border-color: var(--accent); }
+        .form-group textarea { resize: vertical; min-height: 130px; }
+
+        .contact-info { margin-top: 2.5rem; }
+        .contact-link {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none; color: var(--text2);
+            font-size: 0.9rem; font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 0.75rem;
+        }
+        .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+        .contact-link-icon {
+            width: 36px; height: 36px;
+            background: var(--accent-bg);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; color: var(--accent);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 5%;
+            text-align: center;
+        }
+        .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .footer-name span { color: var(--accent); }
+        .footer-links {
+            display: flex; gap: 2rem; justify-content: center;
+            list-style: none; margin: 1rem 0;
+        }
+        .footer-links a {
+            text-decoration: none; color: var(--text3);
+            font-size: 0.88rem; transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-copy { color: var(--text3); font-size: 0.82rem; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            #navLinks { display: none; }
+            .nav-contact-btn { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-img-wrap { max-width: 280px; margin: 0 auto; }
+            .about-stat-card { right: 0; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero-actions { flex-direction: column; align-items: center; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 4rem 4%; }
+            .contact-form { padding: 1.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-logo">Zalan<span>.</span></a>
+
+        <ul id="navLinks">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Skills</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <!-- Theme switcher: Light / Dark / Black -->
+            <div class="theme-switcher" title="Switch theme">
+                <button class="theme-btn active" id="btn-light" onclick="setTheme('light')" title="Light">☀️</button>
+                <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Dark">🌙</button>
+                <button class="theme-btn" id="btn-black" onclick="setTheme('black')" title="Black">⚫</button>
+            </div>
+            <a href="#contact" class="nav-contact-btn">Contact</a>
+            <button class="mobile-menu-btn" onclick="openMenu()" aria-label="Open menu">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMenu()"></div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu">
+        <button class="mobile-close" onclick="closeMenu()">✕</button>
+        <a href="#hero" onclick="closeMenu()">Home</a>
+        <a href="#about" onclick="closeMenu()">About Me</a>
+        <a href="#services" onclick="closeMenu()">Skills</a>
+        <a href="#work" onclick="closeMenu()">My Work</a>
+        <a href="#education" onclick="closeMenu()">Education</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+            <p style="font-size:0.8rem;color:var(--text3);margin-bottom:0.75rem;">Theme</p>
+            <div class="theme-switcher" style="width:fit-content;">
+                <button class="theme-btn active" id="mbtn-light" onclick="setTheme('light')" title="Light">☀️</button>
+                <button class="theme-btn" id="mbtn-dark" onclick="setTheme('dark')" title="Dark">🌙</button>
+                <button class="theme-btn" id="mbtn-black" onclick="setTheme('black')" title="Black">⚫</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+        <div class="hero-bg-circle hero-bg-circle-1"></div>
+        <div class="hero-bg-circle hero-bg-circle-2"></div>
+
+        
+
+        <div class="hero-avatar-placeholder"><span><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzwWGjBruwVb1gFvowiuJgyRNgBMDOmxWjTNmHUOPkYObOTXHtywn480kQeyh5_ish72FJmUYcjrZ4iw2WLhSAKER8zEvpE69djh-9rUqFMA0yt4EnfsQB5l7WtBnJ0xLc6k5D0gttZYGu99v8cdt5XNNbSRgIjFRS10QEa83U5poM7I0xPSE7wxIIxnDG/s200/cropped_circle_image.png" alt="Jalabh Bhandari" /></span></div>
+
+        <p class="hero-greeting">Hi there, I'm</p>
+
+        <h1 class="hero-title">
+            Jalabh Bhandari
+        
+        </h1>
+
+        <p class="hero-sub">
+            Passionate civil engineering student dedicated to accurate surveys, modern 2D/3D design, and structural solutions.
+        </p>
+
+        <div class="hero-location">
+            📍 Surkhet, Nepal &nbsp;·&nbsp; 🎓 Mid-West University
+        </div>
+
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary">
+                Get in Touch <span>→</span>
+            </a>
+            <a href="Zalan_Bro_Resume.pdf" download class="btn-secondary">
+                Download CV <span>⬇</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <p class="section-label reveal">Who I Am</p>
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="divider reveal"></div>
+
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <div class="about-img-box">
+                    <span><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTJu-6WUrwswEisAyJk2PWLsCHL9eY5QOpq2xoftrJeG9_IpXC34j0jbv-kIYskiTS_mzX9VoLfj18AiUvgkeKcpKTRcre0xIMCMJ5lmR9M5LFP2hEnO6b3W4OAwL4qczQiyjoPotcXCNGcZ5Af9NpZ-sB0xXKWqjMpMmMKih9khRRawPuqvCWsU_IB7dO/s4032/IMG_3667.JPG" alt="Jalabh Bhandari" /></span>
+                    <!-- Replace above with: <img src="your-photo.jpg" alt="Jalabh Bhandari" /> -->
+                </div>
+                
+            </div>
+
+            <div class="reveal">
+                <p class="about-bio">
+                    I am a dedicated civil engineering student at <strong>Mid-West University, Nepal</strong>, with strong practical skills in surveying, 2D and 3D design, structural drawing preparation, and Excel data analysis. I enjoy applying engineering principles using modern digital tools to create accurate, efficient, and safe solutions.
+                </p>
+               
+
+                <h3 style="font-size:1rem;margin-bottom:1rem;font-family:'DM Sans',sans-serif;font-weight:600;">Core Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">🔩 AutoCAD</div>
+                    <div class="skill-tag">📦 SketchUp</div>
+                    <div class="skill-tag">📐 Surveying</div>
+                    <div class="skill-tag">📊 MS Excel</div>
+                </div>
+
+                <ul class="info-list">
+                    <li>
+                        <span class="lbl">Degree</span>
+                        <span class="val">B.E. Civil Engineering (2023–2027)</span>
+                    </li>
+                    <li>
+                        <span class="lbl">University</span>
+                        <span class="val">Mid-West University, Nepal</span>
+                    </li>
+                    <li>
+                        <span class="lbl">Location</span>
+                        <span class="val">Surkhet, Nepal</span>
+                    </li>
+                    <li>
+                        <span class="lbl">Email</span>
+                        <span class="val"><a href="mailto:thezalaan@gmail.com" style="color:var(--accent);text-decoration:none;">thezalaan@gmail.com</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES / SKILLS ===== -->
+    <section id="services">
+        <p class="section-label reveal">What I Do</p>
+        <h2 class="section-title reveal">My Expertise</h2>
+        <div class="divider reveal"></div>
+        <p class="section-desc reveal">Combining traditional civil engineering with modern digital tools for precise, efficient results.</p>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">📐</div>
+                <h3>Surveying</h3>
+                <p>Field and digital surveying using modern instruments. Accurate land measurement and data collection for engineering purposes.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">✏️</div>
+                <h3>2D Drafting (AutoCAD)</h3>
+                <p>Precise 2D technical drawings, floor plans, site plans, and construction documents using AutoCAD following engineering standards.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🏗️</div>
+                <h3>3D Modeling (SketchUp)</h3>
+                <p>Creating detailed 3D building models and structural visualizations to communicate design intent clearly and effectively.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📄</div>
+                <h3>Structural Drawing</h3>
+                <p>Preparation of structural drawings including reinforcement details, section views, and construction-ready documentation.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📊</div>
+                <h3>Excel Data Analysis</h3>
+                <p>Engineering data management, calculations, and analysis using Microsoft Excel for quantity surveying and project reports.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WORK ===== -->
+    <section id="work">
+        <p class="section-label reveal">Portfolio</p>
+        <h2 class="section-title reveal">My Work</h2>
+        <div class="divider reveal"></div>
+        <p class="section-desc reveal">Academic and practical projects showcasing my skills in civil engineering.</p>
+
+        <div class="work-grid">
+            <!-- Project 1 -->
+            <div class="work-card reveal">
+                <div class="work-card-img">
+                    <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzszaDXGYgZ9z61Rux0tYH_Df_CGvkXUb00Q&s" alt="project"></span>
+                    <div class="work-card-img-overlay"></div>
+                </div>
+                <div class="work-card-body">
+                    <span class="work-tag">STEAM Project by MOEST</span>
+                    <h3>Seismic Retrofitting of Existing Masonry Buildings</h3>
+                    <p>Research and design project on strengthening existing masonry structures to improve seismic performance, supported by the Ministry of Education and Science and Technology, Nepal.</p>
+                </div>
+                <div class="work-card-footer">
+                    <div class="work-card-tools">
+                        <span class="tool-pill">Safety</span>
+                    </div>
+                    <span style="color:var(--text3);font-size:0.8rem;">2025–2026</span>
+                </div>
+            </div>
+
+            <!-- Project 2 – Coming Soon -->
+            <div class="work-card reveal" style="opacity:0.6; pointer-events:none;">
+                <div class="work-card-img" style="background:var(--surface2);">
+                    <span>🔜</span>
+                    <div class="work-card-img-overlay"></div>
+                </div>
+                <div class="work-card-body">
+                    <span class="work-tag" style="background:var(--surface2);color:var(--text3);">Coming Soon</span>
+                    <h3>Upcoming Project</h3>
+                    <p>Next engineering project in progress. Stay tuned for updates.</p>
+                </div>
+                <div class="work-card-footer">
+                    <div class="work-card-tools">
+                        <span class="tool-pill">Comming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+        <p class="section-label reveal">Background</p>
+        <h2 class="section-title reveal">Education</h2>
+        <div class="divider reveal"></div>
+
+        <div class="edu-timeline">
+            <div class="edu-item reveal">
+                <div class="edu-dot">🎓</div>
+                <div class="edu-content">
+                    <div class="edu-year">2023 – 2027 </div>
+                    <h3>Bachelor of Engineering — Civil Engineering</h3>
+                    <p>Graduate School of Engineering, Mid-West University, Nepal</p>
+                    <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--accent);">Focus: Surveying, Structural Design, CAD Drafting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <p class="section-label reveal">Say Hello</p>
+        <h2 class="section-title reveal">Get In Touch</h2>
+        <div class="divider reveal"></div>
+        <p class="section-desc reveal">Have a project in mind or want to collaborate? Feel free to reach out!</p>
+
+        <div class="contact-wrap">
+            <div class="contact-form reveal">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="zalan">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="zalan@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" placeholder="Project Inquiry / Collaboration">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell me about your project or query..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" onclick="handleSubmit(event)">
+                    Send Message ✉️
+                </button>
+                <p id="form-msg" style="text-align:center;margin-top:0.75rem;font-size:0.88rem;color:var(--accent);"></p>
+            </div>
+
+            <div class="contact-info reveal">
+                <a href="mailto:thezalaan@gmail.com" class="contact-link">
+                    <div class="contact-link-icon">📧</div>
+                    thezalaan@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/jalabh-bhandari-88375a309" target="_blank" class="contact-link">
+                    <div class="contact-link-icon">💼</div>
+                    LinkedIn Profile
+                </a>
+                <a href="https://facebook.com/jalabhbhandari" target="_blank" class="contact-link">
+                    <div class="contact-link-icon">📘</div>
+                    Facebook Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-name">Jalabh Bhnabari<span>.</span></div>
+        <p style="color:var(--text3);font-size:0.88rem;margin-bottom:0.75rem;">Civil Engineering Student · Surkhet, Nepal</p>
+        <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <p class="footer-copy">© 2026 Jalabh Bhandari. All rights reserved.</p>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // ---- THEME ----
+        const themes = ['light', 'dark', 'black'];
+
+        function setTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('zalan-theme', t);
+            // Update all theme buttons
+            themes.forEach(th => {
+                const btn = document.getElementById('btn-' + th);
+                const mBtn = document.getElementById('mbtn-' + th);
+                if (btn) btn.classList.toggle('active', th === t);
+                if (mBtn) mBtn.classList.toggle('active', th === t);
+            });
+        }
+
+        // Load saved theme
+        (function() {
+            const saved = localStorage.getItem('zalan-theme');
+            if (saved && themes.includes(saved)) {
+                setTheme(saved);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+        })();
+
+        // ---- NAVBAR SCROLL ----
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', scrollY > 60);
+        });
+
+        // ---- MOBILE MENU ----
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('open');
+            document.getElementById('mobileOverlay').classList.add('show');
+        }
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('mobileOverlay').classList.remove('show');
+        }
+
+        // ---- SCROLL REVEAL ----
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    e.target.style.transitionDelay = (i * 0.06) + 's';
+                    e.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ---- CONTACT FORM ----
+        function handleSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('form-msg');
+            msg.textContent = '✅ Message sent! I\'ll get back to you soon.';
+            setTimeout(() => msg.textContent = '', 4000);
+        }
+    </script>
+</body>
+</html>
