@@ -1,0 +1,950 @@
+<div class="separator" style="clear: both;">
+  <a href="https://i.ibb.co/SDVP8cfX/pyq-collection-thumbnail.png" style="display: block; padding: 0; text-align: center;">
+    <img border="0" width="0" height="0" 
+         src="https://i.ibb.co/SDVP8cfX/pyq-collection-thumbnail.png" 
+         style="display: none;" 
+         alt="MU past year question Collection" />
+  </a>
+</div>
+
+
+<div class='auth-overlay' id='authOverlay'>
+  <div class='auth-container'>
+    
+    <div class="brand-header-box">
+  
+  <div style="width: 50px; height: 50px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 3px solid #ffd700; box-shadow: 0 0 15px rgba(255,215,0,0.4);">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6sys2VPK_mClau0GwMFW13hxYadkPFT0lixrinqi9xYS5cl_z1gJ1eaeLpPgN6hY25gC3FT9Gng47Kz1Gtv_hIr5g7Snvw5RUZD-xr2bnG22rlK9YKHBBHV-flXzOPZuaBsm5ovKsQj0pmtJ-AeHP5SFjq7IbFMNlP5oSwlOpbsKHM9od3BVNe49eAg/s320/note%20of%20mu%20logo.jpg" alt="Brand Logo" style="width:100%; height:100%; object-fit: cover;">
+  </div>
+   <div class='auth-main-title' style="font-family: 'Poppins', 'Segoe UI', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: 1px; color: #5C3A21; text-shadow: 0 2px 8px rgba(255,215,0,0.5);">
+    Welcome To Note Of MU
+  </div>
+  
+  <div class="premium-desc-row" style="
+      background: linear-gradient(90deg, #1a1a1a, #ffd700, #1a1a1a);
+      background-size: 200% 100%;
+      animation: shine 4s linear infinite;
+      padding: 14px 20px; 
+      border-radius: 12px;
+      border: 1px solid #ffd700;">
+    
+    <img class="premium-icon" src="https://cdn-icons-png.flaticon.com/128/6941/6941697.png" alt="Premium" style="filter: brightness(1.1);">
+    <span style="color: #000000; font-weight: 600;">Become a Premium Member to access this content.</span>
+  </div>
+</div>
+
+<!-- Sliding Gradient Animation -->
+<style>
+@keyframes shine {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+</style>
+
+    <div class="auth-tabs" id="mainTabsContainer">
+      <button type="button" class="auth-tab active" id="tabLogin" onclick="switchMainTab('login')">Login</button>
+      <button type="button" class="auth-tab" id="tabRegister" onclick="switchMainTab('register')">Register</button>
+    </div>
+
+    <div class='auth-success' id='authSuccess' style='display:none;'></div>
+    <div class='auth-error' id='authError' style='display:none;'></div>
+
+    <div class="auth-screen-sub active" id="loginScreenSub">
+      <form onsubmit='handleSubmitFast(event, "login")'>
+        <label class="input-label">Email Address</label>
+        <div class="input-wrapper"><input type='email' class='auth-input' id='loginEmail' placeholder='yourname@gmail.com' required/></div>
+        
+        <label class="input-label">Password</label>
+        <div class="input-wrapper">
+          <input type='password' class='auth-input password-input' id='loginPassword' placeholder='••••••••' required/>
+          <span class="password-toggle" onclick="togglePasswordVisibility('loginPassword')">👁️</span>
+        </div>
+        
+        <div class='forgot-wrapper-div'>
+          <button type="button" class="link-btn-text" onclick="switchWorkflowScreen('forgotScreen')">Forgot Password?</button>
+        </div>
+        
+        <button type='submit' class='auth-button' id="loginBtn">Sign In</button>
+      </form>
+    </div>
+    
+    <div class="auth-screen-sub" id="registerScreenSub">
+      <form onsubmit='handleSubmitFast(event, "signup")'>
+        <label class="input-label">Email Address</label>
+        <div class="input-wrapper"><input type='email' class='auth-input' id='signupEmail' placeholder='yourname@gmail.com' required/></div>
+        
+        <label class="input-label">Password</label>
+        <div class="input-wrapper">
+          <input type='password' class='auth-input password-input' id='signupPassword' placeholder='Min. 6 characters' required minlength='6'/>
+          <span class="password-toggle" onclick="togglePasswordVisibility('signupPassword')">👁️</span>
+        </div>
+        
+        <label class="input-label">Confirm Password</label>
+        <div class="input-wrapper">
+          <input type='password' class='auth-input password-input' id='confirmPassword' placeholder='Re-enter password' required/>
+          <span class="password-toggle" onclick="togglePasswordVisibility('confirmPassword')">👁️</span>
+        </div>
+        
+        <button type='submit' class='auth-button' id="signupBtn">Create Account</button>
+      </form>
+    </div>
+
+    <div id="googleOAuthBlock">
+      <div class="divider">or continue with</div>
+      <div id="g_id_onload" data-client_id="970114880413-jhr71s7eqlqmrj4oh3jtpjutipc1nkgd.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn" data-auto_prompt="false"></div>
+      <div class="google-btn-container">
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left" data-width="360"></div>
+      </div>
+    </div>
+
+    <div class='auth-screen' id='forgotScreen'>
+      <form onsubmit='handleSubmitFast(event, "requestReset")'>
+        <label class="input-label">Registered Gmail Address</label>
+        <div class="input-wrapper"><input type='email' class='auth-input' id='forgotEmail' placeholder='yourname@gmail.com' required/></div>
+        <button type='submit' class='auth-button'>Send Reset Code</button>
+      </form>
+      <div style="text-align:center; margin-top:20px;">
+        <button type="button" class="link-btn-text" style="color:var(--text-muted);" onclick="exitWorkflow()">Back to Login</button>
+      </div>
+    </div>
+
+    <div class='auth-screen' id='verifyOtpScreen'>
+      <div id="otpStep1Block">
+        <form onsubmit='handleSubmitFast(event, "verifyOtpOnly")'>
+          <label class="input-label">Enter 6-Digit OTP Code</label>
+          <div class="input-wrapper"><input type='text' class='auth-input' id='verifyOtpCode' placeholder='123456' required maxlength="6" pattern="\d{6}"/></div>
+          <button type='submit' class='auth-button' id="verifyOtpBtn">Verify OTP Code</button>
+        </form>
+      </div>
+
+      <div id="otpStep2Block" style="display: none; margin-top: 15px;">
+        <form onsubmit='handleSubmitFast(event, "saveNewPasswordOnly")'>
+          <label class="input-label">Enter New Password</label>
+          <div class="input-wrapper">
+            <input type='password' class='auth-input password-input' id='resetNewPassword' placeholder='Min. 6 characters' required minlength='6'/>
+            <span class="password-toggle" onclick="togglePasswordVisibility('resetNewPassword')">👁️</span>
+          </div>
+
+          <label class="input-label">Confirm New Password</label>
+          <div class="input-wrapper">
+            <input type='password' class='auth-input password-input' id='resetConfirmPassword' placeholder='Re-enter new password' required/>
+            <span class="password-toggle" onclick="togglePasswordVisibility('resetConfirmPassword')">👁️</span>
+          </div>
+
+          <button type='submit' class='auth-button'>Update & Save Password</button>
+        </form>
+      </div>
+
+      <div style="text-align:center; margin-top:20px;">
+        <button type="button" class="link-btn-text" style="color:var(--text-muted);" onclick="exitWorkflow()">Cancel and Exit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
+  .auth-overlay {
+    --bg-overlay: rgba(255, 255, 255, 0.96);
+    --bg-card: #ffffff;
+    --primary-color: #1E3A8A; 
+    --primary-hover: #172554;
+    --text-main: #111827;
+    --text-muted: #4B5563;
+    --border-color: #E5E7EB;
+    --input-bg: #FAFAFA;
+    --input-border: #C4CBD6;
+    --tab-inactive: #F3F4F6;
+    --desc-bg: #FEF3C7;
+    --desc-text: #B45309;
+  }
+
+  body.dark .auth-overlay, body.dark-mode .auth-overlay, body.theme-dark .auth-overlay, [data-theme='dark'] .auth-overlay {
+    --bg-overlay: rgba(17, 24, 39, 0.97);
+    --bg-card: #1F2937;
+    --primary-color: #3B82F6;
+    --primary-hover: #2563EB;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --border-color: #374151;
+    --input-bg: #111827;
+    --input-border: #4B5563;
+    --tab-inactive: #374151;
+    --desc-bg: #78350F;
+    --desc-text: #FDE68A;
+  }
+  
+  .post-body, .entry-content, .post-item { filter: blur(14px) !important; pointer-events: none !important; user-select: none !important; transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  body.auth-passed .post-body, body.auth-passed .entry-content, body.auth-passed .post-item { filter: none !important; pointer-events: auto !important; user-select: text !important; }
+  .auth-overlay { position: fixed; inset: 0; background: var(--bg-overlay); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; z-index: 999999; padding: 12px; font-family: 'Inter', sans-serif; }
+  .auth-container { background: var(--bg-card); width: 100%; max-width: 460px; padding: 35px 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 1px solid var(--border-color); box-sizing: border-box; }
+  .brand-header-box { text-align: center; margin-bottom: 25px; }
+  .auth-main-title { font-size: 24px; font-weight: 700; color: var(--text-main) !important; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .premium-desc-row { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; color: var(--desc-text) !important; font-weight: 500; background: var(--desc-bg); padding: 8px 12px; border-radius: 30px; display: inline-flex; }
+  .premium-icon { width: 16px; height: 16px; object-fit: contain; }
+  
+  /* FIX: Explicit container structures to prevent layout collapse */
+  .auth-tabs { display: flex; width: 100%; border-bottom: 2px solid var(--tab-inactive); margin-bottom: 24px; }
+  .auth-tab { flex: 1; text-align: center; padding: 14px 0; font-size: 15px; font-weight: 600; color: var(--text-muted) !important; cursor: pointer; background: none; border: none; border-bottom: 2px solid transparent; transition: all 0.2s; outline: none; }
+  .auth-tab.active { color: var(--primary-color) !important; border-bottom: 2px solid var(--primary-color); }
+  
+  .auth-screen-sub, .auth-screen { display: none; width: 100%; }
+  .auth-screen-sub.active { display: block; }
+  
+  .input-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main) !important; margin-bottom: 6px; text-align: left; }
+  .input-wrapper { position: relative; width: 100%; margin-bottom: 18px; box-sizing: border-box; }
+  .auth-input { width: 100%; height: 50px; padding: 0 16px; font-size: 15px; border: 1px solid var(--input-border); border-radius: 10px; background-color: var(--input-bg) !important; color: var(--text-main) !important; transition: all 0.2s; box-sizing: border-box; }
+  .password-input { padding-right: 48px; }
+  .password-toggle { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: var(--text-muted); user-select: none; z-index: 5; }
+  .auth-button { width: 100%; height: 50px; font-size: 15px; font-weight: 600; color: white !important; background-color: var(--primary-color); border: none; border-radius: 10px; cursor: pointer; transition: background-color 0.2s; margin-top: 5px; }
+  .auth-button:hover { background-color: var(--primary-hover); }
+  
+  /* FIX: Block display on structural separator lines */
+  .divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: var(--text-muted) !important; font-size: 12px; font-weight: 500; width: 100%; }
+  .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
+  .divider:not(:empty)::before { margin-right: 12px; }
+  .divider:not(:empty)::after { margin-left: 12px; }
+  
+  /* FIX: Removed bad flex scaling from OAuth layout blocks */
+  #googleOAuthBlock { display: block; width: 100%; clear: both; margin-top: 15px; }
+  .google-btn-container { display: flex; justify-content: center; width: 100%; }
+  
+  .link-btn-text { background: none; border: none; color: var(--primary-color) !important; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-block; outline: none; padding: 0; }
+  .link-btn-text:hover { text-decoration: underline; }
+  .forgot-wrapper-div { text-align: right; margin-top: -10px; margin-bottom: 18px; }
+  .auth-success, .auth-error { padding: 12px; border-radius: 10px; font-size: 13px; text-align: center; margin-bottom: 20px; font-weight: 500; }
+  .auth-success { background: #DEF7EC; color: #03543F; border: 1px solid #BCF0DA; }
+  .auth-error { background: #FDE8E8; color: #9B1C1C; border: 1px solid #FBD5D5; }
+</style>
+
+<script>
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpVdiBL_qNunbuFTOlYcDOFtZhIBWlmW7HHoGqBvkyCiaFg9q77ehkgOSWkZaVe_hKHw/exec";
+  
+  let LOCAL_DB_CACHE = {}; 
+  let IS_CACHE_READY = false;
+  let ACTIVE_RESET_EMAIL = ""; 
+  let VERIFIED_VALID_OTP = ""; 
+
+  (function checkExistingSession() {
+    const sessionData = localStorage.getItem('mu_auth_session');
+    if (sessionData) {
+      try {
+        const session = JSON.parse(sessionData);
+        if (new Date().getTime() < session.expiresAt) {
+          if(session.status === 'block') {
+            localStorage.removeItem('mu_auth_session');
+            return;
+          }
+          var style = document.createElement('style');
+          style.innerHTML = '.post-body, .entry-content, .post-item { filter: none !important; pointer-events: auto !important; user-select: text !important; } .auth-overlay { display: none !important; }';
+          document.head.appendChild(style);
+          document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.add('auth-passed');
+          });
+        }
+      } catch (e) { localStorage.removeItem('mu_auth_session'); }
+    }
+  })();
+
+  window.addEventListener('DOMContentLoaded', () => {
+    executeJsonpRequest('pullDatabaseIndex', null, function(res) {
+      if(res.success) {
+        LOCAL_DB_CACHE = res.db;
+        IS_CACHE_READY = true;
+      }
+    });
+  });
+
+  function checkGmailStrictness(email) {
+    if(!email.toLowerCase().endsWith('@gmail.com')) {
+      displayMessage('error', 'Access Restriction: Operations are restricted to valid @gmail.com accounts.');
+      return false;
+    }
+    return true;
+  }
+
+  function switchMainTab(activeTab) {
+    clearMessages();
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    
+    // Explicitly restore layout displays cleanly
+    document.getElementById('mainTabsContainer').style.display = 'flex';
+    document.getElementById('googleOAuthBlock').style.display = 'block';
+    
+    document.querySelectorAll('.auth-screen-sub').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.auth-screen').forEach(s => s.style.display = 'none');
+    
+    if (activeTab === 'login') {
+      document.getElementById('tabLogin').classList.add('active');
+      document.getElementById('loginScreenSub').classList.add('active');
+    } else {
+      document.getElementById('tabRegister').classList.add('active');
+      document.getElementById('registerScreenSub').classList.add('active');
+    }
+  }
+
+  function switchWorkflowScreen(screenId) {
+    clearMessages();
+    // Hide standard elements completely
+    document.getElementById('mainTabsContainer').style.display = 'none';
+    document.getElementById('loginScreenSub').classList.remove('active');
+    document.getElementById('registerScreenSub').classList.remove('active');
+    document.getElementById('googleOAuthBlock').style.display = 'none';
+    
+    document.querySelectorAll('.auth-screen').forEach(s => s.style.display = 'none');
+    document.getElementById(screenId).style.display = 'block';
+  }
+
+  function exitWorkflow() {
+    document.getElementById('otpStep1Block').style.display = 'block';
+    document.getElementById('otpStep2Block').style.display = 'none';
+    document.getElementById('verifyOtpCode').value = '';
+    document.getElementById('resetNewPassword').value = '';
+    document.getElementById('resetConfirmPassword').value = '';
+    VERIFIED_VALID_OTP = "";
+    
+    // Explicit structural layout restores
+    document.getElementById('mainTabsContainer').style.display = 'flex';
+    document.getElementById('googleOAuthBlock').style.display = 'block';
+    switchMainTab('login');
+  }
+
+  function togglePasswordVisibility(inputId) {
+    const input = document.getElementById(inputId);
+    input.type = input.type === "password" ? "text" : "password";
+  }
+
+  function clearMessages() {
+    document.getElementById('authSuccess').style.display = 'none';
+    document.getElementById('authError').style.display = 'none';
+  }
+
+  function displayMessage(type, text) {
+    clearMessages();
+    const element = document.getElementById(type === 'success' ? 'authSuccess' : 'authError');
+    element.innerText = text;
+    element.style.display = 'block';
+  }
+
+  function unlockBlog(userDisplayName, emailAddress) {
+    const sessionPeriod = 30 * 24 * 60 * 60 * 1000; 
+    localStorage.setItem('mu_auth_session', JSON.stringify({
+      user: userDisplayName,
+      email: emailAddress,
+      status: 'allow',
+      expiresAt: new Date().getTime() + sessionPeriod
+    }));
+
+    displayMessage('success', `🎉 Welcome ${userDisplayName}! Access granted.`);
+    setTimeout(() => {
+      document.body.classList.add('auth-passed');
+      document.getElementById('authOverlay').style.opacity = '0';
+      document.getElementById('authOverlay').style.visibility = 'hidden';
+      setTimeout(() => { document.getElementById('authOverlay').style.display = 'none'; }, 300);
+    }, 400);
+  }
+
+  function executeJsonpRequest(action, data, successCallback) {
+    const callbackName = 'jsonp_auth_' + Math.round(100000 * Math.random());
+    window[callbackName] = function(response) {
+      delete window[callbackName];
+      document.body.removeChild(script);
+      successCallback(response);
+    };
+    const script = document.createElement('script');
+    const encodedData = data ? encodeURIComponent(JSON.stringify(data)) : "";
+    script.src = `${APPS_SCRIPT_URL}?action=${action}&callback=${callbackName}&data=${encodedData}`;
+    document.body.appendChild(script);
+  }
+
+  function handleSubmitFast(event, action) {
+    event.preventDefault();
+    clearMessages();
+
+    if(!IS_CACHE_READY) {
+      displayMessage('error', 'Connecting to secure server channels...');
+      return;
+    }
+
+    if (action === 'login') {
+      const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+      const pass = document.getElementById('loginPassword').value;
+      if(!checkGmailStrictness(email)) return;
+
+      const record = LOCAL_DB_CACHE[email];
+      if (record) {
+        if(record.status === 'block') {
+          displayMessage('error', 'Access Blocked: Your account has been restricted by administration.');
+          return;
+        }
+        if (record.p === pass.toString()) {
+          unlockBlog(record.n, email);
+        } else {
+          displayMessage('error', 'Invalid email or password combination.');
+        }
+      } else {
+        displayMessage('error', 'No registered profile discovered under this account.');
+      }
+    } 
+    
+    else if (action === 'signup') {
+      const email = document.getElementById('signupEmail').value.toLowerCase().trim();
+      const pass = document.getElementById('signupPassword').value;
+      if(!checkGmailStrictness(email)) return;
+      if(pass !== document.getElementById('confirmPassword').value) {
+        displayMessage('error', 'Passwords do not match.');
+        return;
+      }
+
+      if (LOCAL_DB_CACHE[email]) {
+        displayMessage('error', 'This email registration footprint already exists.');
+        return;
+      }
+
+      const fallbackName = email.split('@')[0];
+      LOCAL_DB_CACHE[email] = { p: pass, n: fallbackName, status: 'allow' }; 
+      unlockBlog(fallbackName, email); 
+      
+      executeJsonpRequest('syncNewUser', { email: email, password: pass }, function() {});
+    } 
+    
+    else if (action === 'requestReset') {
+      const email = document.getElementById('forgotEmail').value.toLowerCase().trim();
+      if(!checkGmailStrictness(email)) return;
+
+      if (!LOCAL_DB_CACHE[email]) {
+        displayMessage('error', 'Email profile footprint not matching our database.');
+        return;
+      }
+
+      ACTIVE_RESET_EMAIL = email; 
+      switchWorkflowScreen('verifyOtpScreen');
+      displayMessage('success', 'OTP Code request dispatched. Check your Gmail inbox.');
+
+      executeJsonpRequest('requestReset', { email: email }, function(res) {
+        if(!res.success) displayMessage('error', res.message);
+      });
+    }
+
+    else if (action === 'verifyOtpOnly') {
+      const inputOtp = document.getElementById('verifyOtpCode').value.trim();
+      displayMessage('success', 'Verifying security token structure...');
+
+      executeJsonpRequest('verifyOtpOnly', { email: ACTIVE_RESET_EMAIL, otp: inputOtp }, function(res) {
+        if (res.success) {
+          VERIFIED_VALID_OTP = inputOtp; 
+          document.getElementById('otpStep1Block').style.display = 'none'; 
+          document.getElementById('otpStep2Block').style.display = 'block'; 
+          displayMessage('success', '✔ OTP verified. Type your new password below.');
+        } else {
+          displayMessage('error', res.message);
+        }
+      });
+    }
+
+    else if (action === 'saveNewPasswordOnly') {
+      const newPass = document.getElementById('resetNewPassword').value;
+      const confirmPass = document.getElementById('resetConfirmPassword').value;
+
+      if (newPass !== confirmPass) {
+        displayMessage('error', 'Passwords do not match.');
+        return;
+      }
+
+      displayMessage('success', 'Updating account database records...');
+
+      executeJsonpRequest('updateUserPassword', { email: ACTIVE_RESET_EMAIL, otp: VERIFIED_VALID_OTP, newPassword: newPass }, function(res) {
+        if (res.success) {
+          if (LOCAL_DB_CACHE[ACTIVE_RESET_EMAIL]) {
+            LOCAL_DB_CACHE[ACTIVE_RESET_EMAIL].p = newPass;
+          }
+          displayMessage('success', '🎉 Password reset complete! Redirecting to login window...');
+          // FIX: Dramatically sped up response delay from 2500ms down to 800ms
+          setTimeout(() => { exitWorkflow(); }, 800);
+        } else {
+          displayMessage('error', res.message);
+        }
+      });
+    }
+  }
+
+  function handleGoogleSignIn(response) {
+    try {
+      const base64Url = response.credential.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      const googleUser = JSON.parse(jsonPayload);
+      const decodedEmail = googleUser.email.toLowerCase().trim();
+      const decodedName = googleUser.name;
+
+      if(!IS_CACHE_READY) {
+        displayMessage('error', 'Database mapping sync in progress... please click again.');
+        return;
+      }
+
+      const record = LOCAL_DB_CACHE[decodedEmail];
+      if (record && record.status === 'block') {
+        displayMessage('error', 'Access Blocked: Your account has been restricted by administration.');
+        return;
+      }
+
+      if(!record) {
+        LOCAL_DB_CACHE[decodedEmail] = { p: "GOOGLE_AUTH_LINK", n: decodedName, status: 'allow' };
+      }
+      
+      unlockBlog(decodedName, decodedEmail);
+      executeJsonpRequest('syncGoogleUser', { email: decodedEmail, name: decodedName }, function() {});
+
+    } catch (err) {
+      displayMessage('error', 'Google Identity payload authentication error.');
+    }
+  }
+</script>
+
+
+
+<!--===== PROFESSIONAL PYQ PAGE - NOTE OF MU =====-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"></link>
+<div class="pq-container">
+  
+  <!--HERO + FILTER-->
+  <div class="hero-filter-section">
+    <div class="logo-circle">
+      <img alt="Your Logo" id="logoImg" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6sys2VPK_mClau0GwMFW13hxYadkPFT0lixrinqi9xYS5cl_z1gJ1eaeLpPgN6hY25gC3FT9Gng47Kz1Gtv_hIr5g7Snvw5RUZD-xr2bnG22rlK9YKHBBHV-flXzOPZuaBsm5ovKsQj0pmtJ-AeHP5SFjq7IbFMNlP5oSwlOpbsKHM9od3BVNe49eAg/s320/note%20of%20mu%20logo.jpg" />
+    </div>
+    <h1><span style="color: #3d85c6;">Past Year Question Collection</span></h1>
+    <p>Graduate School of Engineering | Previous Question Papers</p>
+    
+    <!--Filters-->
+    <div class="filters-inline">
+      <div class="selector-group">
+        <label><span style="color: #3d85c6;"><i class="fa-solid fa-layer-group"></i> Semester</span></label>
+        <select class="custom-select" id="semesterSelect">
+          <option value="">Select Semester</option>
+          <option value="1">Semester 1</option>
+          <option value="2">Semester 2</option>
+          <option value="3">Semester 3</option>
+          <option value="4">Semester 4</option>
+          <option value="5">Semester 5</option>
+          <option value="6">Semester 6</option>
+          <option value="7">Semester 7</option>
+        </select>
+      </div>
+      <div class="selector-group">
+        <label><span style="color: #3d85c6;"><i class="fa-solid fa-calendar"></i> Year (BS)</span></label>
+        <select class="custom-select" disabled="" id="yearSelect">
+          <option value="">Select Year</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <!--Results-->
+  <div id="questionsDisplay"></div>
+</div>
+
+<script>
+// ================== YOUR DATA ==================
+const data = {
+  "1": {
+    "2082": [
+      {
+        preview: "https://drive.google.com/file/d/1aZMaI3BhjeoeaYyUdC2GMGgiacVBDPNG/preview",
+        download: "https://drive.google.com/uc?export=download&id=1aZMaI3BhjeoeaYyUdC2GMGgiacVBDPNG"
+      }
+      // You can add more PDFs here for Semester 1, Year 2082
+    ],
+    "2081": [
+      {
+        preview: "https://drive.google.com/file/d/XXXXXXXX/preview",
+        download: "https://drive.google.com/uc?export=download&id=XXXXXXXX"
+      }
+    ],
+    "2080": [
+      {
+        preview: "https://drive.google.com/file/d/LINK1/preview",
+        download: "https://drive.google.com/uc?export=download&id=LINK1"
+      },
+      {
+        preview: "https://drive.google.com/file/d/LINK2/preview",
+        download: "https://drive.google.com/uc?export=download&id=LINK2"
+      }
+      // ← Add 3rd, 4th PDF here if needed
+    ]
+  },
+  "2": {
+    "2082": [],
+    "2081": [],
+    "2080": []
+  },
+  "3": {
+  "2082": [
+    {
+      preview: "https://drive.google.com/file/d/12iNhyBH6SMRYWpe_jTtXNdznfq57Fh0L/preview",
+      download: "https://drive.google.com/uc?export=download&id=12iNhyBH6SMRYWpe_jTtXNdznfq57Fh0L"
+    }
+  ],
+  "2081": [
+    {
+      preview: "https://drive.google.com/file/d/1LkK_O_mhfi0AL7beJTBVcWVMxOg03MbG/preview",
+      download: "https://drive.google.com/uc?export=download&id=1LkK_O_mhfi0AL7beJTBVcWVMxOg03MbG"
+    }
+  ],
+  "2080": [
+    {
+      preview: "https://drive.google.com/file/d/1akwsR7-OeqSJj96wiKQj6ewNbeq6b4kr/preview",
+      download: "https://drive.google.com/uc?export=download&id=1akwsR7-OeqSJj96wiKQj6ewNbeq6b4kr"
+    },
+    {
+    preview: "https://drive.google.com/file/d/1VBxvdoVJRRpHHZd0jCxxCzkxOmGxNhR5/preview",
+    download: "https://drive.google.com/uc?export=download&id=1VBxvdoVJRRpHHZd0jCxxCzkxOmGxNhR5"
+  }
+  ],
+  "2079": [
+    {
+      preview: "https://drive.google.com/file/d/1VbMDaoGMmRcqSWJfWRcz-xJKudaDBJha/preview",
+      download: "https://drive.google.com/uc?export=download&id=1VbMDaoGMmRcqSWJfWRcz-xJKudaDBJha"
+    }
+  ],
+  "2078": [
+    {
+      preview: "https://drive.google.com/file/d/1b6AwCjlCBpcPQC6s25M6M2k7422ZMWsM/preview",
+      download: "https://drive.google.com/uc?export=download&id=1b6AwCjlCBpcPQC6s25M6M2k7422ZMWsM"
+    }
+  ],
+  "2077": [],
+  "2076": [
+    {
+      preview: "https://drive.google.com/file/d/1fX3p7nsiCdaYwWybkykzqz3f22YwS9O-/preview",
+      download: "https://drive.google.com/uc?export=download&id=1fX3p7nsiCdaYwWybkykzqz3f22YwS9O-"
+    }
+  ]
+},
+  
+  "4": { "2082": [], "2081": [], "2080": [] },
+  "5": { "2082": [], "2081": [], "2080": [] },
+  "6": { "2082": [], "2081": [], "2080": [] },
+  "7": { "2082": [], "2081": [], "2080": [] }
+};
+// ===============================================
+
+const semesterSelect = document.getElementById('semesterSelect');
+const yearSelect = document.getElementById('yearSelect');
+let currentSemester = null;
+
+semesterSelect.addEventListener('change', function () {
+  currentSemester = this.value;
+  if (currentSemester) {
+    yearSelect.disabled = false;
+    yearSelect.innerHTML = `<option value="">Select Year</option>`;
+    for (let y = 2082; y >= 2076; y--) {
+      const option = document.createElement('option');
+      option.value = y;
+      option.textContent = `BS ${y}`;
+      yearSelect.appendChild(option);
+    }
+  } else {
+    yearSelect.disabled = true;
+  }
+  document.getElementById('questionsDisplay').innerHTML = '';
+});
+
+function renderPapers() {
+  const year = yearSelect.value;
+  const display = document.getElementById('questionsDisplay');
+  
+  if (!currentSemester || !year) {
+    display.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-regular fa-folder-open"></i>
+        <h3>Select Semester & Year</h3>
+        <p>Please choose semester and year to view papers.</p>
+      </div>`;
+    return;
+  }
+
+  const papers = data[currentSemester]?.[year] || [];
+  let html = `<div class="result-header"><h2>Semester ${currentSemester} <span>• Year ${year}</span></h2></div>`;
+
+  if (papers.length === 0) {
+    html += `
+      <div class="empty-state">
+        <i class="fa-regular fa-file-lines"></i>
+        <h3>No Papers Available Yet</h3>
+        <p>Question papers will be added soon.</p><p><b>If you have email us at :</b><br>
+      <a href="mailto:notesofmu@gmail.com"><b>notesofmu@gmail.com</b></a></p>
+      </div>`;
+  } else {
+    html += `<div class="papers-grid">`;
+    papers.forEach(paper => {
+      html += `
+        <div class="paper-card">
+          <div class="iframe-wrapper">
+            <iframe src="${paper.preview}" allowfullscreen></iframe>
+          </div>
+          <div class="card-actions">
+            <a href="${paper.preview}" target="_blank" class="preview-btn">
+              <i class="fa-solid fa-eye"></i> Preview
+            </a>
+            <a href="${paper.download}" target="_blank" class="download-btn">
+              <i class="fa-solid fa-download"></i> Download
+            </a>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+  display.innerHTML = html;
+}
+
+yearSelect.addEventListener('change', renderPapers);
+</script>
+
+ <!--Attractive GOT QUESTION BOX Boxs-->
+<style>
+.help{
+  padding:20px;
+  text-align:center;
+  font-family:Arial,sans-serif;
+  margin:25px 0;
+  border:2px dashed #007bff;
+  border-radius:12px;
+}
+.help h2{
+  margin:0 0 10px;
+  font-size:28px;
+  color:#007bff;
+}
+.help p{
+  margin:0;
+  font-size:16px;
+  color:#555;
+}
+.help a{
+  display:inline-block;
+  margin-top:14px;
+  color:#007bff;
+  font-weight:bold;
+  text-decoration:none;
+  font-size:17px;
+}
+.help a:hover{
+  text-decoration:underline;
+}
+</style>
+
+<div class="help">
+  <h2>📚 <b>Help Us To Grow This Collection !!</b></h2>
+  <p>If you have any question papers, please send them to us at:</p>
+  <a href="mailto:notesofmu@gmail.com">📩 notesofmu@gmail.com</a>
+</div>
+
+
+
+<style>
+:root {
+  --primary: #3d85c6;
+  --accent: #14b8a6;
+  --text: #1e2937;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+
+.pq-container {
+  max-width: 1480px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Hero Section */
+.hero-filter-section {
+  background: transparent;
+  padding: 50px 30px 45px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-circle {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 25px;
+  border: 5px solid #e2e8f0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.hero-filter-section h1 {
+  font-size: 2.7rem;
+  margin: 0 0 12px;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.hero-filter-section p {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto 35px;
+}
+
+/* Bigger Filter Boxes */
+.filters-inline {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.selector-group {
+  min-width: 340px;
+  text-align: left;
+}
+
+.selector-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 18px 22px;
+  font-size: 1.12rem;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  color: var(--text);
+}
+
+.custom-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.15);
+  outline: none;
+}
+
+/* Results */
+.result-header h2 {
+  text-align: center;
+  font-size: 2.1rem;
+  margin: 40px 0 35px;
+  color: var(--primary);
+}
+
+.result-header span { 
+  color: var(--primary); 
+}
+
+/* Larger Question Paper Display */
+.papers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  gap: 40px;
+}
+
+.paper-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.iframe-wrapper {
+  position: relative;
+  padding-top: 135%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.iframe-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+.card-actions {
+  padding: 10px 0;
+  display: flex;
+  gap: 14px;
+}
+
+.preview-btn, .download-btn {
+  flex: 1;
+  padding: 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.preview-btn {
+  border: 2px solid #007bff; 
+  color: #990099;
+}
+
+.preview-btn:hover {
+  background: var(--border);
+}
+
+.download-btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 90px 30px;
+  background: white;
+  border: 2px dashed var(--border);
+  border-radius: 24px;
+  color: var(--muted);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-filter-section { padding: 40px 20px 35px; }
+  .hero-filter-section h1 { font-size: 2.2rem; }
+  .logo-circle { width: 140px; height: 140px; }
+  .filters-inline { 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px;
+  }
+  .selector-group { min-width: 100%; }
+  .papers-grid { 
+    grid-template-columns: 1fr; 
+    gap: 30px;
+  }
+  .iframe-wrapper {
+    padding-top: 140%;
+  }
+}
+</style>
